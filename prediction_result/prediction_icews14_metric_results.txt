@@ -1,0 +1,9 @@
+current model: ./model/icews14, 
+prediction_result/prediction_icews14.txt currently finished: 1; results: 
+Hits@1: 0.0
+Hits@3: 1.0
+Hits@10: 1.0
+0
+1
+1
+
