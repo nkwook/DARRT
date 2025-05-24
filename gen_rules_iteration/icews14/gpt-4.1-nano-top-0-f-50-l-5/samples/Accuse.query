@@ -1,0 +1,765 @@
+Sample 1 time: 
+Temporal Logical Rules:
+ Temporal Logical Rules "Accuse(X0,Xl,Tl)<-R1(X0,X1,T0)&...&Rl(X(l-1),Xl,T(l-1))" are rules used in temporal knowledge graph reasoning to predict relations between entities over time. They describe how the relation "Accuse" between entities "X0" and "Xl" evolves from past time steps "Ti (i={0,...,(l-1)})"(rule body) to the next "Tl" (rule head), strictly following the constraint "T0 <= ··· <= T(l-1) < Tl".
+
+You are an expert in temporal knowledge graph reasoning, and please generate as many temporal logical rules as possible related to "Rl" based on extracted temporal rules.
+
+Here are a few examples: 
+
+Rule head: inv_Provide_humanitarian_aid(X0,Xl,Tl)
+Sampled rules:
+	inv_Provide_humanitarian_aid(X0,X1,T1)<-inv_Engage_in_diplomatic_cooperation(X0,X1,T0)
+	inv_Provide_humanitarian_aid(X0,X3,T3)<-inv_Criticize_or_denounce(X0,X1,T0)&inv_Demand(X1,X2,T1)&Make_a_visit(X2,X3,T2)
+	inv_Provide_humanitarian_aid(X0,X2,T2)<-Make_a_visit(X0,X1,T0)&Make_a_visit(X1,X2,T1)
+Generated Temporal logic rules:
+	inv_Provide_humanitarian_aid(X0,X1,T1)<-inv_Provide_aid(X0,X1,T0)
+	inv_Provide_humanitarian_aid(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Consult(X1,X2,T1)
+	inv_Provide_humanitarian_aid(X0,X3,T3)<-inv_Return,_release_person(s)(X0,X1,T0)&Return,_release_person(s)(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Rule head: Appeal_for_change_in_institutions,_regime(X0,Xl,Tl)
+Sampled rules:
+	Appeal_for_change_in_institutions,_regime(X0,X1,T1)<-inv_Engage_in_symbolic_act(X0,X1,T0)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Criticize_or_denounce(X0,X1,T0)&Make_pessimistic_comment(X1,X2,T1)
+Generated Temporal logic rules:
+	Appeal_for_change_in_institutions,_regime(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Rally_support_on_behalf_of(X0,X1,T0)&Praise_or_endorse(X1,X2,T1)
+	Appeal_for_change_in_institutions,_regime(X0,X3,T3)<-Appeal_for_change_in_institutions,_regime(X0,X1,T0)&Host_a_visit(X1,X2,T1)&inv_Criticize_or_denounce(X2,X3,T2)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Engage_in_symbolic_act(X0,X1,T0)&inv_Consult(X1,X2,T1)
+
+Rule head: Appeal_for_economic_aid(X0,Xl,Tl)
+Sampled rules:
+	Appeal_for_economic_aid(X0,X1,T1)<-inv_Reduce_or_stop_military_assistance(X0,X1,T0)
+	Appeal_for_economic_aid(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Make_statement(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X3,T3)<-inv_Demand(X0,X1,T0)&inv_Accede_to_demands_for_change_in_leadership(X1,X2,T1)&Accuse(X2,X3,T2)
+Generated Temporal logic rules:
+	Appeal_for_economic_aid(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&Appeal_for_military_aid(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X2,T2)<-inv_Express_intent_to_cooperate(X0,X1,T0)&Make_statement(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+
+Sampled rules:
+Accuse(X0,X3,T3)<-inv_Make_pessimistic_comment(X0,X1,T0)&Make_statement(X1,X2,T1)&inv_Make_an_appeal_or_request(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-inv_Praise_or_endorse(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Investigate(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Abduct,_hijack,_or_take_hostage(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Engage_in_symbolic_act(X0,X1,T0)&inv_Bring_lawsuit_against(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Abduct,_hijack,_or_take_hostage(X1,X2,T1)&Abduct,_hijack,_or_take_hostage(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&Make_statement(X1,X2,T1)
+
+Accuse(X0,X3,T3)<-inv_Accuse(X0,X1,T0)&Investigate(X1,X2,T1)&inv_Impose_administrative_sanctions(X2,X3,T2)
+
+Accuse(X0,X3,T3)<-Accuse(X0,X1,T0)&inv_Demonstrate_or_rally(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Accuse(X0,X2,T3)<-inv_Make_statement(X0,X1,T0)&Make_statement(X1,X0,T1)&inv_Protest_violently,_riot(X0,X2,T2)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&inv_Express_intent_to_cooperate(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Accuse(X0,X1,T0)&Complain_officially(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X3,T3)<-inv_Reject_proposal_to_meet,_discuss,_or_negotiate(X0,X1,T0)&inv_Host_a_visit(X1,X2,T1)&inv_Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo(X2,X3,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)&Express_intent_to_meet_or_negotiate(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-Investigate(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)
+
+Accuse(X0,X2,T3)<-inv_Accuse(X0,X1,T0)&Accuse(X1,X0,T1)&Accuse(X0,X2,T2)
+
+Accuse(X0,X1,T1)<-Arrest,_detain,_or_charge_with_legal_action(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Reduce_or_break_diplomatic_relations(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)&inv_Praise_or_endorse(X2,X1,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Accuse(X1,X2,T1)&Acknowledge_or_claim_responsibility(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Complain_officially(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Use_conventional_military_force(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Conduct_suicide,_car,_or_other_non-military_bombing(X0,X1,T0)&Appeal_for_military_aid(X1,X2,T1)&Express_intent_to_release_persons_or_property(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Express_intent_to_cooperate(X1,X2,T1)&Make_an_appeal_or_request(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Provide_humanitarian_aid(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Accuse(X0,X1,T0)&Use_unconventional_violence(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-inv_Make_pessimistic_comment(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-inv_Refuse_to_yield(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Express_intent_to_cooperate(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-inv_Use_conventional_military_force(X0,X1,T0)
+
+Accuse(X0,X2,T3)<-inv_Use_unconventional_violence(X0,X1,T0)&Use_unconventional_violence(X1,X0,T1)&inv_Abduct,_hijack,_or_take_hostage(X0,X2,T2)
+
+Accuse(X0,X2,T2)<-inv_fight_with_small_arms_and_light_weapons(X0,X1,T0)&inv_Give_ultimatum(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Make_statement(X0,X1,T0)&Accuse(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Demand(X0,X1,T0)&Demand(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Use_conventional_military_force(X1,X2,T1)&Use_conventional_military_force(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Sexually_assault(X1,X2,T1)
+
+Accuse(X0,X3,T3)<-inv_Accuse(X0,X1,T0)&Make_pessimistic_comment(X1,X2,T1)&inv_Accuse(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-Make_statement(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-inv_Appeal_for_de-escalation_of_military_engagement(X0,X1,T0)&Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Make_statement(X0,X1,T0)&Make_statement(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Demand(X0,X1,T0)
+
+Accuse(X0,X2,T3)<-inv_Demand(X0,X1,T0)&Accuse(X1,X0,T1)&inv_Use_unconventional_violence(X0,X2,T2)
+
+Accuse(X0,X3,T3)<-Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&Expel_or_deport_individuals(X1,X2,T1)&inv_Expel_or_deport_individuals(X2,X3,T2)
+
+Accuse(X0,X2,T2)<-inv_Praise_or_endorse(X0,X1,T0)&Demand(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-inv_Accuse(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&inv_Appeal_for_material_cooperation(X1,X2,T1)
+
+
+
+
+Let's think step-by-step, please generate as many as possible most relevant temporal rules that are relative to "Accuse(X0,Xl,Tl)" based on the above sampled rules.
+
+
+
+For the relations in rule body, you are going to choose from the following candidates: inv_Express_intent_to_mediate;Express_intent_to_release_persons_or_property;Reject_proposal_to_meet,_discuss,_or_negotiate;Express_intent_to_accept_mediation;Expel_or_withdraw;inv_Express_intent_to_release_persons_or_property;inv_Appeal_for_change_in_leadership;Express_intent_to_provide_material_aid;inv_Grant_diplomatic_recognition;Provide_aid;Demand_rights;Employ_aerial_weapons;inv_Expel_or_deport_individuals;inv_Obstruct_passage,_block;inv_Impose_administrative_sanctions;inv_Appeal_for_military_protection_or_peacekeeping;Refuse_to_yield;inv_Acknowledge_or_claim_responsibility;Carry_out_suicide_bombing;Make_pessimistic_comment;inv_Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo;inv_Accede_to_demands_for_rights;Provide_military_protection_or_peacekeeping;Demand_easing_of_administrative_sanctions;Mediate;inv_Return,_release_person(s);Demand_military_aid;inv_Conduct_suicide,_car,_or_other_non-military_bombing;inv_Investigate;inv_Express_intent_to_provide_material_aid;inv_Appeal_for_release_of_persons_or_property;Use_tactics_of_violent_repression;inv_Express_intent_to_accept_mediation;Grant_diplomatic_recognition;Deny_responsibility;inv_Engage_in_mass_killings;inv_Provide_humanitarian_aid;inv_Reject_request_for_change_in_leadership;Appeal_for_easing_of_administrative_sanctions;Impose_blockade,_restrict_movement;Reject_material_cooperation;inv_Use_unconventional_violence;inv_Express_intent_to_provide_humanitarian_aid;Reject_request_for_military_aid;inv_Conduct_strike_or_boycott;Engage_in_material_cooperation;Express_intent_to_provide_military_protection_or_peacekeeping;inv_Demonstrate_military_or_police_power;inv_Confiscate_property;Appeal_for_humanitarian_aid;Appeal_to_yield;inv_Refuse_to_ease_administrative_sanctions;Conduct_strike_or_boycott;inv_Make_statement;Make_a_visit;inv_Carry_out_roadside_bombing;Acknowledge_or_claim_responsibility;Make_statement;inv_Accuse_of_war_crimes;inv_Decline_comment;Engage_in_negotiation;inv_Demand_easing_of_administrative_sanctions;Consider_policy_option;inv_Forgive;Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo;Demand_diplomatic_cooperation_(such_as_policy_support);inv_Veto;inv_Impose_embargo,_boycott,_or_sanctions;Impose_embargo,_boycott,_or_sanctions;inv_Criticize_or_denounce;Demonstrate_military_or_police_power;inv_Reject_proposal_to_meet,_discuss,_or_negotiate;inv_Halt_mediation;Impose_state_of_emergency_or_martial_law;inv_Impose_blockade,_restrict_movement;Demand_humanitarian_aid;Give_ultimatum;Apologize;Express_intent_to_cooperate_militarily;inv_Threaten_with_political_dissent,_protest;inv_Complain_officially;Express_intent_to_de-escalate_military_engagement;Demand_policy_change;inv_Demand_material_cooperation;inv_Obstruct_passage_to_demand_leadership_change;inv_Express_intent_to_yield;inv_Refuse_to_release_persons_or_property;Appeal_for_military_protection_or_peacekeeping;Violate_ceasefire;inv_Demand_settling_of_dispute;inv_Use_conventional_military_force;inv_Accuse_of_espionage,_treason;inv_Destroy_property;inv_Make_pessimistic_comment;Threaten_with_sanctions,_boycott,_embargo;Threaten_to_reduce_or_stop_aid;inv_Demand_diplomatic_cooperation_(such_as_policy_support);Expel_or_withdraw_peacekeepers;inv_Appeal_for_judicial_cooperation;Decline_comment;Express_intent_to_yield;inv_Accuse;Cooperate_militarily;inv_Receive_inspectors;inv_Demand_judicial_cooperation;inv_Impose_restrictions_on_political_freedoms;Carry_out_car_bombing;inv_Return,_release_property;Accuse_of_war_crimes;inv_Threaten_to_reduce_or_stop_aid;inv_Cooperate_militarily;Express_intent_to_engage_in_material_cooperation;inv_Appeal_for_humanitarian_aid;Demand_material_aid;Express_intent_to_cooperate;inv_Demand_military_aid;Reduce_or_stop_economic_assistance;Engage_in_mass_killings;Appeal_for_easing_of_economic_sanctions,_boycott,_or_embargo;inv_Make_an_appeal_or_request;Expel_or_deport_individuals;Express_accord;inv_Demand_de-escalation_of_military_engagement;Threaten_to_reduce_or_break_relations;Return,_release_property;inv_Engage_in_mass_expulsion;inv_Provide_military_protection_or_peacekeeping;inv_Demand_material_aid;Reject_request_for_military_protection_or_peacekeeping;inv_fight_with_artillery_and_tanks;inv_Demand;Refuse_to_ease_administrative_sanctions;inv_Consider_policy_option;inv_Employ_aerial_weapons;Ease_military_blockade;inv_Demand_meeting,_negotiation;Reject;inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support);inv_Demand_rights;inv_Express_intent_to_ease_administrative_sanctions;Accuse_of_aggression;inv_Host_a_visit;inv_Accuse_of_aggression;Threaten;Reject_plan,_agreement_to_settle_dispute;Coerce;inv_Threaten_with_administrative_sanctions;Threaten_with_administrative_sanctions;Provide_humanitarian_aid;Yield;inv_Provide_aid;inv_Threaten_to_halt_negotiations;Confiscate_property;Attempt_to_assassinate;inv_Express_intent_to_cooperate;inv_Seize_or_damage_property;inv_fight_with_small_arms_and_light_weapons;inv_Appeal_to_others_to_meet_or_negotiate;Torture;inv_Protest_violently,_riot;Demand_meeting,_negotiation;Carry_out_roadside_bombing;inv_Kill_by_physical_assault;Sexually_assault;inv_Appeal_for_easing_of_economic_sanctions,_boycott,_or_embargo;inv_Reduce_or_stop_economic_assistance;inv_Rally_support_on_behalf_of;Halt_negotiations;inv_Torture;Appeal_for_release_of_persons_or_property;inv_Make_optimistic_comment;inv_Appeal_for_de-escalation_of_military_engagement;Express_intent_to_mediate;inv_Accuse_of_crime,_corruption;Accuse;inv_Reject_military_cooperation;inv_Threaten_to_reduce_or_break_relations;inv_Sign_formal_agreement;Make_empathetic_comment;inv_Engage_in_negotiation;Impose_restrictions_on_political_freedoms;Appeal_to_others_to_meet_or_negotiate;inv_Threaten_with_repression;inv_Yield;Criticize_or_denounce;Appeal_for_military_aid;inv_Reject_material_cooperation;inv_Make_empathetic_comment;Ease_administrative_sanctions;inv_Express_intent_to_cooperate_on_intelligence;Threaten_to_halt_negotiations;inv_Appeal_for_easing_of_administrative_sanctions;Appeal_for_aid;inv_Reject_economic_cooperation;inv_Express_accord;Engage_in_violent_protest_for_rights;inv_Arrest,_detain,_or_charge_with_legal_action;inv_Assassinate;inv_Demonstrate_or_rally;Seize_or_damage_property;inv_Express_intent_to_engage_in_material_cooperation;inv_Carry_out_suicide_bombing;inv_Reject_plan,_agreement_to_settle_dispute;Demand_mediation;Engage_in_symbolic_act;Appeal_to_others_to_settle_dispute;inv_Refuse_to_yield;Accuse_of_crime,_corruption;Praise_or_endorse;inv_Abduct,_hijack,_or_take_hostage;inv_Reject_request_for_military_aid;inv_Reduce_or_break_diplomatic_relations;Express_intent_to_ease_administrative_sanctions;inv_Expel_or_withdraw;inv_Express_intent_to_cooperate_militarily;Use_unconventional_violence;inv_Appeal_for_military_aid;Engage_in_diplomatic_cooperation;Protest_violently,_riot;Obstruct_passage,_block;Appeal_to_engage_in_or_accept_mediation;inv_Appeal_to_others_to_settle_dispute;inv_Engage_in_violent_protest_for_rights;Threaten_non-force;Reduce_relations;Physically_assault;Appeal_for_de-escalation_of_military_engagement;Reject_judicial_cooperation;inv_Express_intent_to_provide_military_aid;inv_Express_intent_to_meet_or_negotiate;inv_Share_intelligence_or_information;Appeal_for_rights;Arrest,_detain,_or_charge_with_legal_action;inv_Threaten_with_military_force;Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support);Abduct,_hijack,_or_take_hostage;Demand_release_of_persons_or_property;inv_Make_a_visit;inv_Reject;inv_Attempt_to_assassinate;Consult;Threaten_with_political_dissent,_protest;Make_an_appeal_or_request;Express_intent_to_provide_military_aid;inv_Impose_state_of_emergency_or_martial_law;inv_Threaten_non-force;Threaten_with_military_force;inv_Bring_lawsuit_against;Demand_material_cooperation;inv_Ease_economic_sanctions,_boycott,_embargo;Appeal_for_material_cooperation;Complain_officially;Demand_judicial_cooperation;inv_Praise_or_endorse;Rally_support_on_behalf_of;inv_Accede_to_demands_for_change_in_institutions,_regime;Accede_to_demands_for_rights;inv_Consult;Express_intent_to_meet_or_negotiate;Investigate;inv_Express_intent_to_provide_military_protection_or_peacekeeping;Appeal_for_diplomatic_cooperation_(such_as_policy_support);inv_Engage_in_symbolic_act;Host_a_visit;inv_Demand_that_target_yields;inv_Reject_request_for_military_protection_or_peacekeeping;Impose_administrative_sanctions;inv_Apologize;inv_Appeal_for_aid;Reject_military_cooperation;inv_Demand_release_of_persons_or_property;Obstruct_passage_to_demand_leadership_change;Ease_economic_sanctions,_boycott,_embargo;Accede_to_demands_for_change_in_institutions,_regime;Threaten_with_repression;inv_Appeal_to_yield;Express_intent_to_provide_humanitarian_aid;Demand_intelligence_cooperation;inv_Provide_military_aid;inv_Mobilize_or_increase_armed_forces;Demand_de-escalation_of_military_engagement;inv_Threaten;inv_Appeal_for_rights;Demand_that_target_yields;inv_Give_ultimatum;inv_Deny_responsibility;inv_Engage_in_material_cooperation;inv_Accede_to_demands_for_change_in_leadership;inv_Demand_intelligence_cooperation;Conduct_suicide,_car,_or_other_non-military_bombing;inv_Appeal_to_engage_in_or_accept_mediation;Provide_military_aid;inv_Appeal_for_material_cooperation;Accede_to_demands_for_change_in_leadership;Demonstrate_or_rally;inv_Carry_out_car_bombing;Reduce_or_break_diplomatic_relations;inv_Reject_judicial_cooperation;Threaten_to_halt_mediation;inv_Ease_administrative_sanctions;inv_Sexually_assault;inv_Ease_military_blockade;inv_Mediate;inv_Coerce;Express_intent_to_cooperate_on_intelligence;inv_Demand_humanitarian_aid;Receive_inspectors;inv_Use_tactics_of_violent_repression;fight_with_small_arms_and_light_weapons;inv_Threaten_to_halt_mediation;Destroy_property;Reduce_or_stop_humanitarian_assistance;Return,_release_person(s);Demand;inv_Engage_in_diplomatic_cooperation;inv_Appeal_for_change_in_institutions,_regime;inv_Violate_ceasefire;inv_Halt_negotiations;fight_with_artillery_and_tanks;inv_Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support);inv_Demand_policy_change;inv_Expel_or_withdraw_peacekeepers;Kill_by_physical_assault;Reject_request_for_change_in_leadership;Bring_lawsuit_against;Use_conventional_military_force;Reduce_or_stop_military_assistance;inv_Threaten_with_sanctions,_boycott,_embargo;inv_Physically_assault;Refuse_to_release_persons_or_property;inv_Express_intent_to_de-escalate_military_engagement;inv_Demand_mediation.
+
+ Return the rules only without any explanations.
+Sample 2 time: 
+Temporal Logical Rules:
+ Temporal Logical Rules "Accuse(X0,Xl,Tl)<-R1(X0,X1,T0)&...&Rl(X(l-1),Xl,T(l-1))" are rules used in temporal knowledge graph reasoning to predict relations between entities over time. They describe how the relation "Accuse" between entities "X0" and "Xl" evolves from past time steps "Ti (i={0,...,(l-1)})"(rule body) to the next "Tl" (rule head), strictly following the constraint "T0 <= ··· <= T(l-1) < Tl".
+
+You are an expert in temporal knowledge graph reasoning, and please generate as many temporal logical rules as possible related to "Rl" based on extracted temporal rules.
+
+Here are a few examples: 
+
+Rule head: inv_Provide_humanitarian_aid(X0,Xl,Tl)
+Sampled rules:
+	inv_Provide_humanitarian_aid(X0,X1,T1)<-inv_Engage_in_diplomatic_cooperation(X0,X1,T0)
+	inv_Provide_humanitarian_aid(X0,X3,T3)<-inv_Criticize_or_denounce(X0,X1,T0)&inv_Demand(X1,X2,T1)&Make_a_visit(X2,X3,T2)
+	inv_Provide_humanitarian_aid(X0,X2,T2)<-Make_a_visit(X0,X1,T0)&Make_a_visit(X1,X2,T1)
+Generated Temporal logic rules:
+	inv_Provide_humanitarian_aid(X0,X1,T1)<-inv_Provide_aid(X0,X1,T0)
+	inv_Provide_humanitarian_aid(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Consult(X1,X2,T1)
+	inv_Provide_humanitarian_aid(X0,X3,T3)<-inv_Return,_release_person(s)(X0,X1,T0)&Return,_release_person(s)(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Rule head: Appeal_for_change_in_institutions,_regime(X0,Xl,Tl)
+Sampled rules:
+	Appeal_for_change_in_institutions,_regime(X0,X1,T1)<-inv_Engage_in_symbolic_act(X0,X1,T0)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Criticize_or_denounce(X0,X1,T0)&Make_pessimistic_comment(X1,X2,T1)
+Generated Temporal logic rules:
+	Appeal_for_change_in_institutions,_regime(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Rally_support_on_behalf_of(X0,X1,T0)&Praise_or_endorse(X1,X2,T1)
+	Appeal_for_change_in_institutions,_regime(X0,X3,T3)<-Appeal_for_change_in_institutions,_regime(X0,X1,T0)&Host_a_visit(X1,X2,T1)&inv_Criticize_or_denounce(X2,X3,T2)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Engage_in_symbolic_act(X0,X1,T0)&inv_Consult(X1,X2,T1)
+
+Rule head: Appeal_for_economic_aid(X0,Xl,Tl)
+Sampled rules:
+	Appeal_for_economic_aid(X0,X1,T1)<-inv_Reduce_or_stop_military_assistance(X0,X1,T0)
+	Appeal_for_economic_aid(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Make_statement(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X3,T3)<-inv_Demand(X0,X1,T0)&inv_Accede_to_demands_for_change_in_leadership(X1,X2,T1)&Accuse(X2,X3,T2)
+Generated Temporal logic rules:
+	Appeal_for_economic_aid(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&Appeal_for_military_aid(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X2,T2)<-inv_Express_intent_to_cooperate(X0,X1,T0)&Make_statement(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+
+Sampled rules:
+Accuse(X0,X3,T3)<-inv_Make_statement(X0,X1,T0)&inv_Threaten(X1,X2,T1)&Express_intent_to_meet_or_negotiate(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-inv_Make_statement(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Abduct,_hijack,_or_take_hostage(X1,X2,T1)&Abduct,_hijack,_or_take_hostage(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-inv_Demonstrate_or_rally(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-inv_Reduce_relations(X0,X1,T0)&inv_Threaten(X1,X0,T1)&inv_Express_intent_to_meet_or_negotiate(X0,X1,T2)
+
+Accuse(X0,X2,T2)<-Express_intent_to_release_persons_or_property(X0,X1,T0)&Demonstrate_or_rally(X1,X2,T1)
+
+Accuse(X0,X3,T3)<-inv_Accuse(X0,X1,T0)&Investigate(X1,X2,T1)&inv_Impose_administrative_sanctions(X2,X3,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&Sign_formal_agreement(X1,X2,T1)&Sign_formal_agreement(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-Express_intent_to_meet_or_negotiate(X0,X1,T0)&Express_intent_to_meet_or_negotiate(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&Protest_violently,_riot(X1,X2,T1)&inv_Accuse_of_crime,_corruption(X2,X1,T2)
+
+Accuse(X0,X3,T3)<-Make_statement(X0,X1,T0)&inv_Make_statement(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Accuse(X0,X2,T2)<-inv_Praise_or_endorse(X0,X1,T0)&Demand(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Make_statement(X0,X1,T0)&Accuse(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Use_conventional_military_force(X1,X2,T1)&Use_conventional_military_force(X2,X1,T2)
+
+Accuse(X0,X3,T3)<-Make_pessimistic_comment(X0,X1,T0)&inv_Engage_in_negotiation(X1,X2,T1)&Consult(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-Investigate(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-Criticize_or_denounce(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-inv_Arrest,_detain,_or_charge_with_legal_action(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Express_intent_to_cooperate(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Reject(X0,X1,T0)&Demonstrate_or_rally(X1,X2,T1)&inv_Express_intent_to_meet_or_negotiate(X2,X1,T2)
+
+Accuse(X0,X3,T3)<-Make_an_appeal_or_request(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)&inv_Criticize_or_denounce(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-inv_Rally_opposition_against(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-Make_pessimistic_comment(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)&Express_intent_to_meet_or_negotiate(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-inv_fight_with_small_arms_and_light_weapons(X0,X1,T0)&inv_Give_ultimatum(X1,X2,T1)
+
+Accuse(X0,X2,T3)<-inv_Accuse(X0,X1,T0)&Accuse(X1,X0,T1)&Accuse(X0,X2,T2)
+
+Accuse(X0,X3,T3)<-Accuse(X0,X1,T0)&inv_Demonstrate_or_rally(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-inv_Refuse_to_yield(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Accuse(X1,X2,T1)&Acknowledge_or_claim_responsibility(X2,X1,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Accuse(X1,X0,T1)&Accuse(X0,X1,T2)
+
+Accuse(X0,X1,T1)<-Rally_opposition_against(X0,X1,T0)
+
+Accuse(X0,X3,T3)<-inv_Demand(X0,X1,T0)&Make_statement(X1,X2,T1)&inv_Accuse(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-inv_Arrest,_detain,_or_charge_with_legal_action(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)&Make_an_appeal_or_request(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-inv_Accuse(X0,X1,T0)&Complain_officially(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Make_statement(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Express_intent_to_meet_or_negotiate(X1,X2,T1)
+
+Accuse(X0,X2,T3)<-inv_Make_statement(X0,X1,T0)&Make_statement(X1,X0,T1)&inv_Protest_violently,_riot(X0,X2,T2)
+
+Accuse(X0,X1,T1)<-inv_Make_pessimistic_comment(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Reject(X0,X1,T0)&inv_Give_ultimatum(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&inv_Make_statement(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Complain_officially(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Engage_in_symbolic_act(X0,X1,T0)&inv_Bring_lawsuit_against(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Use_conventional_military_force(X0,X1,T0)&inv_Praise_or_endorse(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Make_statement(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Accuse_of_human_rights_abuses(X0,X1,T0)&inv_Accuse(X1,X0,T1)&Accuse_of_human_rights_abuses(X0,X1,T2)
+
+Accuse(X0,X3,T3)<-inv_Make_pessimistic_comment(X0,X1,T0)&Make_statement(X1,X2,T1)&inv_Make_an_appeal_or_request(X2,X3,T2)
+
+Accuse(X0,X1,T3)<-Use_unconventional_violence(X0,X1,T0)&inv_Accuse(X1,X0,T1)&Use_unconventional_violence(X0,X1,T2)
+
+
+
+
+Let's think step-by-step, please generate as many as possible most relevant temporal rules that are relative to "Accuse(X0,Xl,Tl)" based on the above sampled rules.
+
+
+
+
+
+For the relations in rule body, you are going to choose from the following candidates: inv_Express_intent_to_mediate;Express_intent_to_release_persons_or_property;Reject_proposal_to_meet,_discuss,_or_negotiate;Express_intent_to_accept_mediation;Expel_or_withdraw;inv_Express_intent_to_release_persons_or_property;inv_Appeal_for_change_in_leadership;Express_intent_to_provide_material_aid;inv_Grant_diplomatic_recognition;Provide_aid;Demand_rights;Employ_aerial_weapons;inv_Expel_or_deport_individuals;inv_Obstruct_passage,_block;inv_Impose_administrative_sanctions;inv_Appeal_for_military_protection_or_peacekeeping;Refuse_to_yield;inv_Acknowledge_or_claim_responsibility;Carry_out_suicide_bombing;Make_pessimistic_comment;inv_Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo;inv_Accede_to_demands_for_rights;Provide_military_protection_or_peacekeeping;Demand_easing_of_administrative_sanctions;Mediate;inv_Return,_release_person(s);Demand_military_aid;inv_Conduct_suicide,_car,_or_other_non-military_bombing;inv_Investigate;inv_Express_intent_to_provide_material_aid;inv_Appeal_for_release_of_persons_or_property;Use_tactics_of_violent_repression;inv_Express_intent_to_accept_mediation;Grant_diplomatic_recognition;Deny_responsibility;inv_Engage_in_mass_killings;inv_Provide_humanitarian_aid;inv_Reject_request_for_change_in_leadership;Appeal_for_easing_of_administrative_sanctions;Impose_blockade,_restrict_movement;Reject_material_cooperation;inv_Use_unconventional_violence;inv_Express_intent_to_provide_humanitarian_aid;Reject_request_for_military_aid;inv_Conduct_strike_or_boycott;Engage_in_material_cooperation;Express_intent_to_provide_military_protection_or_peacekeeping;inv_Demonstrate_military_or_police_power;inv_Confiscate_property;Appeal_for_humanitarian_aid;Appeal_to_yield;inv_Refuse_to_ease_administrative_sanctions;Conduct_strike_or_boycott;inv_Make_statement;Make_a_visit;inv_Carry_out_roadside_bombing;Acknowledge_or_claim_responsibility;Make_statement;inv_Accuse_of_war_crimes;inv_Decline_comment;Engage_in_negotiation;inv_Demand_easing_of_administrative_sanctions;Consider_policy_option;inv_Forgive;Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo;Demand_diplomatic_cooperation_(such_as_policy_support);inv_Veto;inv_Impose_embargo,_boycott,_or_sanctions;Impose_embargo,_boycott,_or_sanctions;inv_Criticize_or_denounce;Demonstrate_military_or_police_power;inv_Reject_proposal_to_meet,_discuss,_or_negotiate;inv_Halt_mediation;Impose_state_of_emergency_or_martial_law;inv_Impose_blockade,_restrict_movement;Demand_humanitarian_aid;Give_ultimatum;Apologize;Express_intent_to_cooperate_militarily;inv_Threaten_with_political_dissent,_protest;inv_Complain_officially;Express_intent_to_de-escalate_military_engagement;Demand_policy_change;inv_Demand_material_cooperation;inv_Obstruct_passage_to_demand_leadership_change;inv_Express_intent_to_yield;inv_Refuse_to_release_persons_or_property;Appeal_for_military_protection_or_peacekeeping;Violate_ceasefire;inv_Demand_settling_of_dispute;inv_Use_conventional_military_force;inv_Accuse_of_espionage,_treason;inv_Destroy_property;inv_Make_pessimistic_comment;Threaten_with_sanctions,_boycott,_embargo;Threaten_to_reduce_or_stop_aid;inv_Demand_diplomatic_cooperation_(such_as_policy_support);Expel_or_withdraw_peacekeepers;inv_Appeal_for_judicial_cooperation;Decline_comment;Express_intent_to_yield;inv_Accuse;Cooperate_militarily;inv_Receive_inspectors;inv_Demand_judicial_cooperation;inv_Impose_restrictions_on_political_freedoms;Carry_out_car_bombing;inv_Return,_release_property;Accuse_of_war_crimes;inv_Threaten_to_reduce_or_stop_aid;inv_Cooperate_militarily;Express_intent_to_engage_in_material_cooperation;inv_Appeal_for_humanitarian_aid;Demand_material_aid;Express_intent_to_cooperate;inv_Demand_military_aid;Reduce_or_stop_economic_assistance;Engage_in_mass_killings;Appeal_for_easing_of_economic_sanctions,_boycott,_or_embargo;inv_Make_an_appeal_or_request;Expel_or_deport_individuals;Express_accord;inv_Demand_de-escalation_of_military_engagement;Threaten_to_reduce_or_break_relations;Return,_release_property;inv_Engage_in_mass_expulsion;inv_Provide_military_protection_or_peacekeeping;inv_Demand_material_aid;Reject_request_for_military_protection_or_peacekeeping;inv_fight_with_artillery_and_tanks;inv_Demand;Refuse_to_ease_administrative_sanctions;inv_Consider_policy_option;inv_Employ_aerial_weapons;Ease_military_blockade;inv_Demand_meeting,_negotiation;Reject;inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support);inv_Demand_rights;inv_Express_intent_to_ease_administrative_sanctions;Accuse_of_aggression;inv_Host_a_visit;inv_Accuse_of_aggression;Threaten;Reject_plan,_agreement_to_settle_dispute;Coerce;inv_Threaten_with_administrative_sanctions;Threaten_with_administrative_sanctions;Provide_humanitarian_aid;Yield;inv_Provide_aid;inv_Threaten_to_halt_negotiations;Confiscate_property;Attempt_to_assassinate;inv_Express_intent_to_cooperate;inv_Seize_or_damage_property;inv_fight_with_small_arms_and_light_weapons;inv_Appeal_to_others_to_meet_or_negotiate;Torture;inv_Protest_violently,_riot;Demand_meeting,_negotiation;Carry_out_roadside_bombing;inv_Kill_by_physical_assault;Sexually_assault;inv_Appeal_for_easing_of_economic_sanctions,_boycott,_or_embargo;inv_Reduce_or_stop_economic_assistance;inv_Rally_support_on_behalf_of;Halt_negotiations;inv_Torture;Appeal_for_release_of_persons_or_property;inv_Make_optimistic_comment;inv_Appeal_for_de-escalation_of_military_engagement;Express_intent_to_mediate;inv_Accuse_of_crime,_corruption;Accuse;inv_Reject_military_cooperation;inv_Threaten_to_reduce_or_break_relations;inv_Sign_formal_agreement;Make_empathetic_comment;inv_Engage_in_negotiation;Impose_restrictions_on_political_freedoms;Appeal_to_others_to_meet_or_negotiate;inv_Threaten_with_repression;inv_Yield;Criticize_or_denounce;Appeal_for_military_aid;inv_Reject_material_cooperation;inv_Make_empathetic_comment;Ease_administrative_sanctions;inv_Express_intent_to_cooperate_on_intelligence;Threaten_to_halt_negotiations;inv_Appeal_for_easing_of_administrative_sanctions;Appeal_for_aid;inv_Reject_economic_cooperation;inv_Express_accord;Engage_in_violent_protest_for_rights;inv_Arrest,_detain,_or_charge_with_legal_action;inv_Assassinate;inv_Demonstrate_or_rally;Seize_or_damage_property;inv_Express_intent_to_engage_in_material_cooperation;inv_Carry_out_suicide_bombing;inv_Reject_plan,_agreement_to_settle_dispute;Demand_mediation;Engage_in_symbolic_act;Appeal_to_others_to_settle_dispute;inv_Refuse_to_yield;Accuse_of_crime,_corruption;Praise_or_endorse;inv_Abduct,_hijack,_or_take_hostage;inv_Reject_request_for_military_aid;inv_Reduce_or_break_diplomatic_relations;Express_intent_to_ease_administrative_sanctions;inv_Expel_or_withdraw;inv_Express_intent_to_cooperate_militarily;Use_unconventional_violence;inv_Appeal_for_military_aid;Engage_in_diplomatic_cooperation;Protest_violently,_riot;Obstruct_passage,_block;Appeal_to_engage_in_or_accept_mediation;inv_Appeal_to_others_to_settle_dispute;inv_Engage_in_violent_protest_for_rights;Threaten_non-force;Reduce_relations;Physically_assault;Appeal_for_de-escalation_of_military_engagement;Reject_judicial_cooperation;inv_Express_intent_to_provide_military_aid;inv_Express_intent_to_meet_or_negotiate;inv_Share_intelligence_or_information;Appeal_for_rights;Arrest,_detain,_or_charge_with_legal_action;inv_Threaten_with_military_force;Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support);Abduct,_hijack,_or_take_hostage;Demand_release_of_persons_or_property;inv_Make_a_visit;inv_Reject;inv_Attempt_to_assassinate;Consult;Threaten_with_political_dissent,_protest;Make_an_appeal_or_request;Express_intent_to_provide_military_aid;inv_Impose_state_of_emergency_or_martial_law;inv_Threaten_non-force;Threaten_with_military_force;inv_Bring_lawsuit_against;Demand_material_cooperation;inv_Ease_economic_sanctions,_boycott,_embargo;Appeal_for_material_cooperation;Complain_officially;Demand_judicial_cooperation;inv_Praise_or_endorse;Rally_support_on_behalf_of;inv_Accede_to_demands_for_change_in_institutions,_regime;Accede_to_demands_for_rights;inv_Consult;Express_intent_to_meet_or_negotiate;Investigate;inv_Express_intent_to_provide_military_protection_or_peacekeeping;Appeal_for_diplomatic_cooperation_(such_as_policy_support);inv_Engage_in_symbolic_act;Host_a_visit;inv_Demand_that_target_yields;inv_Reject_request_for_military_protection_or_peacekeeping;Impose_administrative_sanctions;inv_Apologize;inv_Appeal_for_aid;Reject_military_cooperation;inv_Demand_release_of_persons_or_property;Obstruct_passage_to_demand_leadership_change;Ease_economic_sanctions,_boycott,_embargo;Accede_to_demands_for_change_in_institutions,_regime;Threaten_with_repression;inv_Appeal_to_yield;Express_intent_to_provide_humanitarian_aid;Demand_intelligence_cooperation;inv_Provide_military_aid;inv_Mobilize_or_increase_armed_forces;Demand_de-escalation_of_military_engagement;inv_Threaten;inv_Appeal_for_rights;Demand_that_target_yields;inv_Give_ultimatum;inv_Deny_responsibility;inv_Engage_in_material_cooperation;inv_Accede_to_demands_for_change_in_leadership;inv_Demand_intelligence_cooperation;Conduct_suicide,_car,_or_other_non-military_bombing;inv_Appeal_to_engage_in_or_accept_mediation;Provide_military_aid;inv_Appeal_for_material_cooperation;Accede_to_demands_for_change_in_leadership;Demonstrate_or_rally;inv_Carry_out_car_bombing;Reduce_or_break_diplomatic_relations;inv_Reject_judicial_cooperation;Threaten_to_halt_mediation;inv_Ease_administrative_sanctions;inv_Sexually_assault;inv_Ease_military_blockade;inv_Mediate;inv_Coerce;Express_intent_to_cooperate_on_intelligence;inv_Demand_humanitarian_aid;Receive_inspectors;inv_Use_tactics_of_violent_repression;fight_with_small_arms_and_light_weapons;inv_Threaten_to_halt_mediation;Destroy_property;Reduce_or_stop_humanitarian_assistance;Return,_release_person(s);Demand;inv_Engage_in_diplomatic_cooperation;inv_Appeal_for_change_in_institutions,_regime;inv_Violate_ceasefire;inv_Halt_negotiations;fight_with_artillery_and_tanks;inv_Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support);inv_Demand_policy_change;inv_Expel_or_withdraw_peacekeepers;Kill_by_physical_assault;Reject_request_for_change_in_leadership;Bring_lawsuit_against;Use_conventional_military_force;Reduce_or_stop_military_assistance;inv_Threaten_with_sanctions,_boycott,_embargo;inv_Physically_assault;Refuse_to_release_persons_or_property;inv_Express_intent_to_de-escalate_military_engagement;inv_Demand_mediation.
+
+ Return the rules only without any explanations.
+Sample 3 time: 
+Temporal Logical Rules:
+ Temporal Logical Rules "Accuse(X0,Xl,Tl)<-R1(X0,X1,T0)&...&Rl(X(l-1),Xl,T(l-1))" are rules used in temporal knowledge graph reasoning to predict relations between entities over time. They describe how the relation "Accuse" between entities "X0" and "Xl" evolves from past time steps "Ti (i={0,...,(l-1)})"(rule body) to the next "Tl" (rule head), strictly following the constraint "T0 <= ··· <= T(l-1) < Tl".
+
+You are an expert in temporal knowledge graph reasoning, and please generate as many temporal logical rules as possible related to "Rl" based on extracted temporal rules.
+
+Here are a few examples: 
+
+Rule head: inv_Provide_humanitarian_aid(X0,Xl,Tl)
+Sampled rules:
+	inv_Provide_humanitarian_aid(X0,X1,T1)<-inv_Engage_in_diplomatic_cooperation(X0,X1,T0)
+	inv_Provide_humanitarian_aid(X0,X3,T3)<-inv_Criticize_or_denounce(X0,X1,T0)&inv_Demand(X1,X2,T1)&Make_a_visit(X2,X3,T2)
+	inv_Provide_humanitarian_aid(X0,X2,T2)<-Make_a_visit(X0,X1,T0)&Make_a_visit(X1,X2,T1)
+Generated Temporal logic rules:
+	inv_Provide_humanitarian_aid(X0,X1,T1)<-inv_Provide_aid(X0,X1,T0)
+	inv_Provide_humanitarian_aid(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Consult(X1,X2,T1)
+	inv_Provide_humanitarian_aid(X0,X3,T3)<-inv_Return,_release_person(s)(X0,X1,T0)&Return,_release_person(s)(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Rule head: Appeal_for_change_in_institutions,_regime(X0,Xl,Tl)
+Sampled rules:
+	Appeal_for_change_in_institutions,_regime(X0,X1,T1)<-inv_Engage_in_symbolic_act(X0,X1,T0)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Criticize_or_denounce(X0,X1,T0)&Make_pessimistic_comment(X1,X2,T1)
+Generated Temporal logic rules:
+	Appeal_for_change_in_institutions,_regime(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Rally_support_on_behalf_of(X0,X1,T0)&Praise_or_endorse(X1,X2,T1)
+	Appeal_for_change_in_institutions,_regime(X0,X3,T3)<-Appeal_for_change_in_institutions,_regime(X0,X1,T0)&Host_a_visit(X1,X2,T1)&inv_Criticize_or_denounce(X2,X3,T2)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Engage_in_symbolic_act(X0,X1,T0)&inv_Consult(X1,X2,T1)
+
+Rule head: Appeal_for_economic_aid(X0,Xl,Tl)
+Sampled rules:
+	Appeal_for_economic_aid(X0,X1,T1)<-inv_Reduce_or_stop_military_assistance(X0,X1,T0)
+	Appeal_for_economic_aid(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Make_statement(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X3,T3)<-inv_Demand(X0,X1,T0)&inv_Accede_to_demands_for_change_in_leadership(X1,X2,T1)&Accuse(X2,X3,T2)
+Generated Temporal logic rules:
+	Appeal_for_economic_aid(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&Appeal_for_military_aid(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X2,T2)<-inv_Express_intent_to_cooperate(X0,X1,T0)&Make_statement(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+
+Sampled rules:
+Accuse(X0,X2,T2)<-Express_intent_to_meet_or_negotiate(X0,X1,T0)&inv_Protest_violently,_riot(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Accuse(X0,X1,T0)&Use_unconventional_violence(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-inv_Praise_or_endorse(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-Abduct,_hijack,_or_take_hostage(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X2,T3)<-inv_Demand(X0,X1,T0)&Accuse(X1,X0,T1)&inv_Use_unconventional_violence(X0,X2,T2)
+
+Accuse(X0,X1,T1)<-inv_Rally_opposition_against(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-inv_Demonstrate_or_rally(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-inv_Threaten(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&inv_Make_statement(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Use_conventional_military_force(X0,X1,T0)&inv_Cooperate_economically(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Express_intent_to_meet_or_negotiate(X1,X2,T1)
+
+Accuse(X0,X3,T3)<-inv_Make_statement(X0,X1,T0)&inv_Threaten(X1,X2,T1)&Express_intent_to_meet_or_negotiate(X2,X3,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&Protest_violently,_riot(X1,X2,T1)&inv_Accuse_of_crime,_corruption(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-inv_Make_an_appeal_or_request(X0,X1,T0)
+
+Accuse(X0,X2,T3)<-Defy_norms,_law(X0,X1,T0)&Make_an_appeal_or_request(X1,X0,T1)&inv_fight_with_small_arms_and_light_weapons(X0,X2,T2)
+
+Accuse(X0,X2,T3)<-inv_Make_statement(X0,X1,T0)&Make_statement(X1,X0,T1)&inv_Protest_violently,_riot(X0,X2,T2)
+
+Accuse(X0,X1,T1)<-Investigate(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-inv_Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&inv_Make_statement(X1,X2,T1)&Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X2,X1,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Abduct,_hijack,_or_take_hostage(X1,X2,T1)&Abduct,_hijack,_or_take_hostage(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-inv_Make_statement(X0,X1,T0)&Accuse(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Refuse_to_ease_administrative_sanctions(X0,X1,T0)
+
+Accuse(X0,X3,T3)<-Express_intent_to_meet_or_negotiate(X0,X1,T0)&inv_Consult(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Investigate(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Reduce_or_break_diplomatic_relations(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)&inv_Praise_or_endorse(X2,X1,T2)
+
+Accuse(X0,X3,T3)<-inv_Accuse(X0,X1,T0)&Investigate(X1,X2,T1)&inv_Impose_administrative_sanctions(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-Make_statement(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-inv_Bring_lawsuit_against(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Engage_in_symbolic_act(X0,X1,T0)&inv_Bring_lawsuit_against(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Make_statement(X0,X1,T0)&Express_intent_to_cooperate(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-inv_Make_statement(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Use_unconventional_violence(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-inv_Make_pessimistic_comment(X0,X1,T0)
+
+Accuse(X0,X3,T3)<-Make_pessimistic_comment(X0,X1,T0)&inv_Engage_in_negotiation(X1,X2,T1)&Consult(X2,X3,T2)
+
+Accuse(X0,X2,T3)<-inv_Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&inv_Express_intent_to_cooperate(X1,X0,T1)&Make_statement(X0,X2,T2)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Make_statement(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Make_statement(X1,X2,T1)&Make_statement(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-inv_Reject(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-inv_Arrest,_detain,_or_charge_with_legal_action(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-Accuse(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Conduct_suicide,_car,_or_other_non-military_bombing(X0,X1,T0)&Appeal_for_military_aid(X1,X2,T1)&Express_intent_to_release_persons_or_property(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-Demand(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-inv_Reduce_relations(X0,X1,T0)&inv_Threaten(X1,X0,T1)&inv_Express_intent_to_meet_or_negotiate(X0,X1,T2)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&inv_Express_intent_to_cooperate(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-inv_Criticize_or_denounce(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Use_conventional_military_force(X1,X2,T1)&Use_conventional_military_force(X2,X1,T2)
+
+
+
+
+Let's think step-by-step, please generate as many as possible most relevant temporal rules that are relative to "Accuse(X0,Xl,Tl)" based on the above sampled rules.
+
+
+
+
+
+
+
+For the relations in rule body, you are going to choose from the following candidates: inv_Express_intent_to_mediate;Express_intent_to_release_persons_or_property;Reject_proposal_to_meet,_discuss,_or_negotiate;Express_intent_to_accept_mediation;Expel_or_withdraw;inv_Express_intent_to_release_persons_or_property;inv_Appeal_for_change_in_leadership;Express_intent_to_provide_material_aid;inv_Grant_diplomatic_recognition;Provide_aid;Demand_rights;Employ_aerial_weapons;inv_Expel_or_deport_individuals;inv_Obstruct_passage,_block;inv_Impose_administrative_sanctions;inv_Appeal_for_military_protection_or_peacekeeping;Refuse_to_yield;inv_Acknowledge_or_claim_responsibility;Carry_out_suicide_bombing;Make_pessimistic_comment;inv_Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo;inv_Accede_to_demands_for_rights;Provide_military_protection_or_peacekeeping;Demand_easing_of_administrative_sanctions;Mediate;inv_Return,_release_person(s);Demand_military_aid;inv_Conduct_suicide,_car,_or_other_non-military_bombing;inv_Investigate;inv_Express_intent_to_provide_material_aid;inv_Appeal_for_release_of_persons_or_property;Use_tactics_of_violent_repression;inv_Express_intent_to_accept_mediation;Grant_diplomatic_recognition;Deny_responsibility;inv_Engage_in_mass_killings;inv_Provide_humanitarian_aid;inv_Reject_request_for_change_in_leadership;Appeal_for_easing_of_administrative_sanctions;Impose_blockade,_restrict_movement;Reject_material_cooperation;inv_Use_unconventional_violence;inv_Express_intent_to_provide_humanitarian_aid;Reject_request_for_military_aid;inv_Conduct_strike_or_boycott;Engage_in_material_cooperation;Express_intent_to_provide_military_protection_or_peacekeeping;inv_Demonstrate_military_or_police_power;inv_Confiscate_property;Appeal_for_humanitarian_aid;Appeal_to_yield;inv_Refuse_to_ease_administrative_sanctions;Conduct_strike_or_boycott;inv_Make_statement;Make_a_visit;inv_Carry_out_roadside_bombing;Acknowledge_or_claim_responsibility;Make_statement;inv_Accuse_of_war_crimes;inv_Decline_comment;Engage_in_negotiation;inv_Demand_easing_of_administrative_sanctions;Consider_policy_option;inv_Forgive;Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo;Demand_diplomatic_cooperation_(such_as_policy_support);inv_Veto;inv_Impose_embargo,_boycott,_or_sanctions;Impose_embargo,_boycott,_or_sanctions;inv_Criticize_or_denounce;Demonstrate_military_or_police_power;inv_Reject_proposal_to_meet,_discuss,_or_negotiate;inv_Halt_mediation;Impose_state_of_emergency_or_martial_law;inv_Impose_blockade,_restrict_movement;Demand_humanitarian_aid;Give_ultimatum;Apologize;Express_intent_to_cooperate_militarily;inv_Threaten_with_political_dissent,_protest;inv_Complain_officially;Express_intent_to_de-escalate_military_engagement;Demand_policy_change;inv_Demand_material_cooperation;inv_Obstruct_passage_to_demand_leadership_change;inv_Express_intent_to_yield;inv_Refuse_to_release_persons_or_property;Appeal_for_military_protection_or_peacekeeping;Violate_ceasefire;inv_Demand_settling_of_dispute;inv_Use_conventional_military_force;inv_Accuse_of_espionage,_treason;inv_Destroy_property;inv_Make_pessimistic_comment;Threaten_with_sanctions,_boycott,_embargo;Threaten_to_reduce_or_stop_aid;inv_Demand_diplomatic_cooperation_(such_as_policy_support);Expel_or_withdraw_peacekeepers;inv_Appeal_for_judicial_cooperation;Decline_comment;Express_intent_to_yield;inv_Accuse;Cooperate_militarily;inv_Receive_inspectors;inv_Demand_judicial_cooperation;inv_Impose_restrictions_on_political_freedoms;Carry_out_car_bombing;inv_Return,_release_property;Accuse_of_war_crimes;inv_Threaten_to_reduce_or_stop_aid;inv_Cooperate_militarily;Express_intent_to_engage_in_material_cooperation;inv_Appeal_for_humanitarian_aid;Demand_material_aid;Express_intent_to_cooperate;inv_Demand_military_aid;Reduce_or_stop_economic_assistance;Engage_in_mass_killings;Appeal_for_easing_of_economic_sanctions,_boycott,_or_embargo;inv_Make_an_appeal_or_request;Expel_or_deport_individuals;Express_accord;inv_Demand_de-escalation_of_military_engagement;Threaten_to_reduce_or_break_relations;Return,_release_property;inv_Engage_in_mass_expulsion;inv_Provide_military_protection_or_peacekeeping;inv_Demand_material_aid;Reject_request_for_military_protection_or_peacekeeping;inv_fight_with_artillery_and_tanks;inv_Demand;Refuse_to_ease_administrative_sanctions;inv_Consider_policy_option;inv_Employ_aerial_weapons;Ease_military_blockade;inv_Demand_meeting,_negotiation;Reject;inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support);inv_Demand_rights;inv_Express_intent_to_ease_administrative_sanctions;Accuse_of_aggression;inv_Host_a_visit;inv_Accuse_of_aggression;Threaten;Reject_plan,_agreement_to_settle_dispute;Coerce;inv_Threaten_with_administrative_sanctions;Threaten_with_administrative_sanctions;Provide_humanitarian_aid;Yield;inv_Provide_aid;inv_Threaten_to_halt_negotiations;Confiscate_property;Attempt_to_assassinate;inv_Express_intent_to_cooperate;inv_Seize_or_damage_property;inv_fight_with_small_arms_and_light_weapons;inv_Appeal_to_others_to_meet_or_negotiate;Torture;inv_Protest_violently,_riot;Demand_meeting,_negotiation;Carry_out_roadside_bombing;inv_Kill_by_physical_assault;Sexually_assault;inv_Appeal_for_easing_of_economic_sanctions,_boycott,_or_embargo;inv_Reduce_or_stop_economic_assistance;inv_Rally_support_on_behalf_of;Halt_negotiations;inv_Torture;Appeal_for_release_of_persons_or_property;inv_Make_optimistic_comment;inv_Appeal_for_de-escalation_of_military_engagement;Express_intent_to_mediate;inv_Accuse_of_crime,_corruption;Accuse;inv_Reject_military_cooperation;inv_Threaten_to_reduce_or_break_relations;inv_Sign_formal_agreement;Make_empathetic_comment;inv_Engage_in_negotiation;Impose_restrictions_on_political_freedoms;Appeal_to_others_to_meet_or_negotiate;inv_Threaten_with_repression;inv_Yield;Criticize_or_denounce;Appeal_for_military_aid;inv_Reject_material_cooperation;inv_Make_empathetic_comment;Ease_administrative_sanctions;inv_Express_intent_to_cooperate_on_intelligence;Threaten_to_halt_negotiations;inv_Appeal_for_easing_of_administrative_sanctions;Appeal_for_aid;inv_Reject_economic_cooperation;inv_Express_accord;Engage_in_violent_protest_for_rights;inv_Arrest,_detain,_or_charge_with_legal_action;inv_Assassinate;inv_Demonstrate_or_rally;Seize_or_damage_property;inv_Express_intent_to_engage_in_material_cooperation;inv_Carry_out_suicide_bombing;inv_Reject_plan,_agreement_to_settle_dispute;Demand_mediation;Engage_in_symbolic_act;Appeal_to_others_to_settle_dispute;inv_Refuse_to_yield;Accuse_of_crime,_corruption;Praise_or_endorse;inv_Abduct,_hijack,_or_take_hostage;inv_Reject_request_for_military_aid;inv_Reduce_or_break_diplomatic_relations;Express_intent_to_ease_administrative_sanctions;inv_Expel_or_withdraw;inv_Express_intent_to_cooperate_militarily;Use_unconventional_violence;inv_Appeal_for_military_aid;Engage_in_diplomatic_cooperation;Protest_violently,_riot;Obstruct_passage,_block;Appeal_to_engage_in_or_accept_mediation;inv_Appeal_to_others_to_settle_dispute;inv_Engage_in_violent_protest_for_rights;Threaten_non-force;Reduce_relations;Physically_assault;Appeal_for_de-escalation_of_military_engagement;Reject_judicial_cooperation;inv_Express_intent_to_provide_military_aid;inv_Express_intent_to_meet_or_negotiate;inv_Share_intelligence_or_information;Appeal_for_rights;Arrest,_detain,_or_charge_with_legal_action;inv_Threaten_with_military_force;Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support);Abduct,_hijack,_or_take_hostage;Demand_release_of_persons_or_property;inv_Make_a_visit;inv_Reject;inv_Attempt_to_assassinate;Consult;Threaten_with_political_dissent,_protest;Make_an_appeal_or_request;Express_intent_to_provide_military_aid;inv_Impose_state_of_emergency_or_martial_law;inv_Threaten_non-force;Threaten_with_military_force;inv_Bring_lawsuit_against;Demand_material_cooperation;inv_Ease_economic_sanctions,_boycott,_embargo;Appeal_for_material_cooperation;Complain_officially;Demand_judicial_cooperation;inv_Praise_or_endorse;Rally_support_on_behalf_of;inv_Accede_to_demands_for_change_in_institutions,_regime;Accede_to_demands_for_rights;inv_Consult;Express_intent_to_meet_or_negotiate;Investigate;inv_Express_intent_to_provide_military_protection_or_peacekeeping;Appeal_for_diplomatic_cooperation_(such_as_policy_support);inv_Engage_in_symbolic_act;Host_a_visit;inv_Demand_that_target_yields;inv_Reject_request_for_military_protection_or_peacekeeping;Impose_administrative_sanctions;inv_Apologize;inv_Appeal_for_aid;Reject_military_cooperation;inv_Demand_release_of_persons_or_property;Obstruct_passage_to_demand_leadership_change;Ease_economic_sanctions,_boycott,_embargo;Accede_to_demands_for_change_in_institutions,_regime;Threaten_with_repression;inv_Appeal_to_yield;Express_intent_to_provide_humanitarian_aid;Demand_intelligence_cooperation;inv_Provide_military_aid;inv_Mobilize_or_increase_armed_forces;Demand_de-escalation_of_military_engagement;inv_Threaten;inv_Appeal_for_rights;Demand_that_target_yields;inv_Give_ultimatum;inv_Deny_responsibility;inv_Engage_in_material_cooperation;inv_Accede_to_demands_for_change_in_leadership;inv_Demand_intelligence_cooperation;Conduct_suicide,_car,_or_other_non-military_bombing;inv_Appeal_to_engage_in_or_accept_mediation;Provide_military_aid;inv_Appeal_for_material_cooperation;Accede_to_demands_for_change_in_leadership;Demonstrate_or_rally;inv_Carry_out_car_bombing;Reduce_or_break_diplomatic_relations;inv_Reject_judicial_cooperation;Threaten_to_halt_mediation;inv_Ease_administrative_sanctions;inv_Sexually_assault;inv_Ease_military_blockade;inv_Mediate;inv_Coerce;Express_intent_to_cooperate_on_intelligence;inv_Demand_humanitarian_aid;Receive_inspectors;inv_Use_tactics_of_violent_repression;fight_with_small_arms_and_light_weapons;inv_Threaten_to_halt_mediation;Destroy_property;Reduce_or_stop_humanitarian_assistance;Return,_release_person(s);Demand;inv_Engage_in_diplomatic_cooperation;inv_Appeal_for_change_in_institutions,_regime;inv_Violate_ceasefire;inv_Halt_negotiations;fight_with_artillery_and_tanks;inv_Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support);inv_Demand_policy_change;inv_Expel_or_withdraw_peacekeepers;Kill_by_physical_assault;Reject_request_for_change_in_leadership;Bring_lawsuit_against;Use_conventional_military_force;Reduce_or_stop_military_assistance;inv_Threaten_with_sanctions,_boycott,_embargo;inv_Physically_assault;Refuse_to_release_persons_or_property;inv_Express_intent_to_de-escalate_military_engagement;inv_Demand_mediation.
+
+ Return the rules only without any explanations.
+Sample 4 time: 
+Temporal Logical Rules:
+ Temporal Logical Rules "Accuse(X0,Xl,Tl)<-R1(X0,X1,T0)&...&Rl(X(l-1),Xl,T(l-1))" are rules used in temporal knowledge graph reasoning to predict relations between entities over time. They describe how the relation "Accuse" between entities "X0" and "Xl" evolves from past time steps "Ti (i={0,...,(l-1)})"(rule body) to the next "Tl" (rule head), strictly following the constraint "T0 <= ··· <= T(l-1) < Tl".
+
+You are an expert in temporal knowledge graph reasoning, and please generate as many temporal logical rules as possible related to "Rl" based on extracted temporal rules.
+
+Here are a few examples: 
+
+Rule head: inv_Provide_humanitarian_aid(X0,Xl,Tl)
+Sampled rules:
+	inv_Provide_humanitarian_aid(X0,X1,T1)<-inv_Engage_in_diplomatic_cooperation(X0,X1,T0)
+	inv_Provide_humanitarian_aid(X0,X3,T3)<-inv_Criticize_or_denounce(X0,X1,T0)&inv_Demand(X1,X2,T1)&Make_a_visit(X2,X3,T2)
+	inv_Provide_humanitarian_aid(X0,X2,T2)<-Make_a_visit(X0,X1,T0)&Make_a_visit(X1,X2,T1)
+Generated Temporal logic rules:
+	inv_Provide_humanitarian_aid(X0,X1,T1)<-inv_Provide_aid(X0,X1,T0)
+	inv_Provide_humanitarian_aid(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Consult(X1,X2,T1)
+	inv_Provide_humanitarian_aid(X0,X3,T3)<-inv_Return,_release_person(s)(X0,X1,T0)&Return,_release_person(s)(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Rule head: Appeal_for_change_in_institutions,_regime(X0,Xl,Tl)
+Sampled rules:
+	Appeal_for_change_in_institutions,_regime(X0,X1,T1)<-inv_Engage_in_symbolic_act(X0,X1,T0)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Criticize_or_denounce(X0,X1,T0)&Make_pessimistic_comment(X1,X2,T1)
+Generated Temporal logic rules:
+	Appeal_for_change_in_institutions,_regime(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Rally_support_on_behalf_of(X0,X1,T0)&Praise_or_endorse(X1,X2,T1)
+	Appeal_for_change_in_institutions,_regime(X0,X3,T3)<-Appeal_for_change_in_institutions,_regime(X0,X1,T0)&Host_a_visit(X1,X2,T1)&inv_Criticize_or_denounce(X2,X3,T2)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Engage_in_symbolic_act(X0,X1,T0)&inv_Consult(X1,X2,T1)
+
+Rule head: Appeal_for_economic_aid(X0,Xl,Tl)
+Sampled rules:
+	Appeal_for_economic_aid(X0,X1,T1)<-inv_Reduce_or_stop_military_assistance(X0,X1,T0)
+	Appeal_for_economic_aid(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Make_statement(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X3,T3)<-inv_Demand(X0,X1,T0)&inv_Accede_to_demands_for_change_in_leadership(X1,X2,T1)&Accuse(X2,X3,T2)
+Generated Temporal logic rules:
+	Appeal_for_economic_aid(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&Appeal_for_military_aid(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X2,T2)<-inv_Express_intent_to_cooperate(X0,X1,T0)&Make_statement(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+
+Sampled rules:
+Accuse(X0,X2,T3)<-inv_Demand(X0,X1,T0)&Accuse(X1,X0,T1)&inv_Use_unconventional_violence(X0,X2,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Express_intent_to_cooperate(X1,X2,T1)&Make_an_appeal_or_request(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Defy_norms,_law(X0,X1,T0)&Consult(X1,X2,T1)&Consult(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&Criticize_or_denounce(X1,X2,T1)&inv_Make_an_appeal_or_request(X2,X1,T2)
+
+Accuse(X0,X3,T3)<-Make_statement(X0,X1,T0)&inv_Make_statement(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Accuse(X0,X3,T3)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Make_statement(X1,X2,T1)&inv_Give_ultimatum(X2,X3,T2)
+
+Accuse(X0,X3,T3)<-inv_Accuse(X0,X1,T0)&Investigate(X1,X2,T1)&inv_Impose_administrative_sanctions(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-Accuse(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Arrest,_detain,_or_charge_with_legal_action(X1,X2,T1)&Arrest,_detain,_or_charge_with_legal_action(X2,X1,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Make_a_visit(X1,X2,T1)&inv_Host_a_visit(X2,X1,T2)
+
+Accuse(X0,X3,T3)<-inv_Make_a_visit(X0,X1,T0)&Make_optimistic_comment(X1,X2,T1)&Engage_in_negotiation(X2,X3,T2)
+
+Accuse(X0,X2,T2)<-inv_Make_statement(X0,X1,T0)&Accuse(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Demand(X0,X1,T0)&Demand(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Use_conventional_military_force(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Complain_officially(X1,X2,T1)
+
+Accuse(X0,X3,T3)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)&Criticize_or_denounce(X2,X3,T2)
+
+Accuse(X0,X3,T3)<-Make_an_appeal_or_request(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)&inv_Criticize_or_denounce(X2,X3,T2)
+
+Accuse(X0,X1,T3)<-Reduce_or_break_diplomatic_relations(X0,X1,T0)&inv_Consult(X1,X0,T1)&Engage_in_negotiation(X0,X1,T2)
+
+Accuse(X0,X1,T3)<-inv_Reduce_relations(X0,X1,T0)&inv_Threaten(X1,X0,T1)&inv_Express_intent_to_meet_or_negotiate(X0,X1,T2)
+
+Accuse(X0,X2,T3)<-inv_Accuse(X0,X1,T0)&Accuse(X1,X0,T1)&Accuse(X0,X2,T2)
+
+Accuse(X0,X3,T3)<-inv_Make_statement(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)&Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X2,X3,T2)
+
+Accuse(X0,X2,T2)<-Express_intent_to_meet_or_negotiate(X0,X1,T0)&Express_intent_to_meet_or_negotiate(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&Consult(X1,X2,T1)&Make_a_visit(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-Accuse(X0,X1,T0)&Use_unconventional_violence(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Demand_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-Make_pessimistic_comment(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&Make_statement(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Abduct,_hijack,_or_take_hostage(X1,X2,T1)&Abduct,_hijack,_or_take_hostage(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Arrest,_detain,_or_charge_with_legal_action(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X3,T3)<-inv_Demand(X0,X1,T0)&Make_statement(X1,X2,T1)&inv_Accuse(X2,X3,T2)
+
+Accuse(X0,X2,T2)<-inv_Appeal_for_de-escalation_of_military_engagement(X0,X1,T0)&Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X2,T3)<-inv_Use_unconventional_violence(X0,X1,T0)&Use_unconventional_violence(X1,X0,T1)&inv_Abduct,_hijack,_or_take_hostage(X0,X2,T2)
+
+Accuse(X0,X2,T2)<-Express_intent_to_release_persons_or_property(X0,X1,T0)&Demonstrate_or_rally(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Sexually_assault(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Make_statement(X0,X1,T0)&Make_statement(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse_of_human_rights_abuses(X0,X1,T0)&inv_Accuse(X1,X0,T1)&Accuse_of_human_rights_abuses(X0,X1,T2)
+
+Accuse(X0,X2,T2)<-inv_Use_conventional_military_force(X0,X1,T0)&inv_Cooperate_economically(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Impose_restrictions_on_political_freedoms(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-inv_Demonstrate_or_rally(X0,X1,T0)
+
+Accuse(X0,X3,T3)<-Express_intent_to_meet_or_negotiate(X0,X1,T0)&inv_Consult(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Express_intent_to_meet_or_negotiate(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Reject(X0,X1,T0)&inv_Criticize_or_denounce(X1,X2,T1)
+
+Accuse(X0,X2,T3)<-inv_Reject(X0,X1,T0)&Arrest,_detain,_or_charge_with_legal_action(X1,X0,T1)&Express_intent_to_meet_or_negotiate(X0,X2,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Accuse(X1,X2,T1)&Acknowledge_or_claim_responsibility(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-Criticize_or_denounce(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-inv_Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&inv_Make_statement(X1,X2,T1)&Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X2,X1,T2)
+
+
+
+
+Let's think step-by-step, please generate as many as possible most relevant temporal rules that are relative to "Accuse(X0,Xl,Tl)" based on the above sampled rules.
+
+
+
+
+
+
+
+
+
+For the relations in rule body, you are going to choose from the following candidates: inv_Express_intent_to_mediate;Express_intent_to_release_persons_or_property;Reject_proposal_to_meet,_discuss,_or_negotiate;Express_intent_to_accept_mediation;Expel_or_withdraw;inv_Express_intent_to_release_persons_or_property;inv_Appeal_for_change_in_leadership;Express_intent_to_provide_material_aid;inv_Grant_diplomatic_recognition;Provide_aid;Demand_rights;Employ_aerial_weapons;inv_Expel_or_deport_individuals;inv_Obstruct_passage,_block;inv_Impose_administrative_sanctions;inv_Appeal_for_military_protection_or_peacekeeping;Refuse_to_yield;inv_Acknowledge_or_claim_responsibility;Carry_out_suicide_bombing;Make_pessimistic_comment;inv_Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo;inv_Accede_to_demands_for_rights;Provide_military_protection_or_peacekeeping;Demand_easing_of_administrative_sanctions;Mediate;inv_Return,_release_person(s);Demand_military_aid;inv_Conduct_suicide,_car,_or_other_non-military_bombing;inv_Investigate;inv_Express_intent_to_provide_material_aid;inv_Appeal_for_release_of_persons_or_property;Use_tactics_of_violent_repression;inv_Express_intent_to_accept_mediation;Grant_diplomatic_recognition;Deny_responsibility;inv_Engage_in_mass_killings;inv_Provide_humanitarian_aid;inv_Reject_request_for_change_in_leadership;Appeal_for_easing_of_administrative_sanctions;Impose_blockade,_restrict_movement;Reject_material_cooperation;inv_Use_unconventional_violence;inv_Express_intent_to_provide_humanitarian_aid;Reject_request_for_military_aid;inv_Conduct_strike_or_boycott;Engage_in_material_cooperation;Express_intent_to_provide_military_protection_or_peacekeeping;inv_Demonstrate_military_or_police_power;inv_Confiscate_property;Appeal_for_humanitarian_aid;Appeal_to_yield;inv_Refuse_to_ease_administrative_sanctions;Conduct_strike_or_boycott;inv_Make_statement;Make_a_visit;inv_Carry_out_roadside_bombing;Acknowledge_or_claim_responsibility;Make_statement;inv_Accuse_of_war_crimes;inv_Decline_comment;Engage_in_negotiation;inv_Demand_easing_of_administrative_sanctions;Consider_policy_option;inv_Forgive;Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo;Demand_diplomatic_cooperation_(such_as_policy_support);inv_Veto;inv_Impose_embargo,_boycott,_or_sanctions;Impose_embargo,_boycott,_or_sanctions;inv_Criticize_or_denounce;Demonstrate_military_or_police_power;inv_Reject_proposal_to_meet,_discuss,_or_negotiate;inv_Halt_mediation;Impose_state_of_emergency_or_martial_law;inv_Impose_blockade,_restrict_movement;Demand_humanitarian_aid;Give_ultimatum;Apologize;Express_intent_to_cooperate_militarily;inv_Threaten_with_political_dissent,_protest;inv_Complain_officially;Express_intent_to_de-escalate_military_engagement;Demand_policy_change;inv_Demand_material_cooperation;inv_Obstruct_passage_to_demand_leadership_change;inv_Express_intent_to_yield;inv_Refuse_to_release_persons_or_property;Appeal_for_military_protection_or_peacekeeping;Violate_ceasefire;inv_Demand_settling_of_dispute;inv_Use_conventional_military_force;inv_Accuse_of_espionage,_treason;inv_Destroy_property;inv_Make_pessimistic_comment;Threaten_with_sanctions,_boycott,_embargo;Threaten_to_reduce_or_stop_aid;inv_Demand_diplomatic_cooperation_(such_as_policy_support);Expel_or_withdraw_peacekeepers;inv_Appeal_for_judicial_cooperation;Decline_comment;Express_intent_to_yield;inv_Accuse;Cooperate_militarily;inv_Receive_inspectors;inv_Demand_judicial_cooperation;inv_Impose_restrictions_on_political_freedoms;Carry_out_car_bombing;inv_Return,_release_property;Accuse_of_war_crimes;inv_Threaten_to_reduce_or_stop_aid;inv_Cooperate_militarily;Express_intent_to_engage_in_material_cooperation;inv_Appeal_for_humanitarian_aid;Demand_material_aid;Express_intent_to_cooperate;inv_Demand_military_aid;Reduce_or_stop_economic_assistance;Engage_in_mass_killings;Appeal_for_easing_of_economic_sanctions,_boycott,_or_embargo;inv_Make_an_appeal_or_request;Expel_or_deport_individuals;Express_accord;inv_Demand_de-escalation_of_military_engagement;Threaten_to_reduce_or_break_relations;Return,_release_property;inv_Engage_in_mass_expulsion;inv_Provide_military_protection_or_peacekeeping;inv_Demand_material_aid;Reject_request_for_military_protection_or_peacekeeping;inv_fight_with_artillery_and_tanks;inv_Demand;Refuse_to_ease_administrative_sanctions;inv_Consider_policy_option;inv_Employ_aerial_weapons;Ease_military_blockade;inv_Demand_meeting,_negotiation;Reject;inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support);inv_Demand_rights;inv_Express_intent_to_ease_administrative_sanctions;Accuse_of_aggression;inv_Host_a_visit;inv_Accuse_of_aggression;Threaten;Reject_plan,_agreement_to_settle_dispute;Coerce;inv_Threaten_with_administrative_sanctions;Threaten_with_administrative_sanctions;Provide_humanitarian_aid;Yield;inv_Provide_aid;inv_Threaten_to_halt_negotiations;Confiscate_property;Attempt_to_assassinate;inv_Express_intent_to_cooperate;inv_Seize_or_damage_property;inv_fight_with_small_arms_and_light_weapons;inv_Appeal_to_others_to_meet_or_negotiate;Torture;inv_Protest_violently,_riot;Demand_meeting,_negotiation;Carry_out_roadside_bombing;inv_Kill_by_physical_assault;Sexually_assault;inv_Appeal_for_easing_of_economic_sanctions,_boycott,_or_embargo;inv_Reduce_or_stop_economic_assistance;inv_Rally_support_on_behalf_of;Halt_negotiations;inv_Torture;Appeal_for_release_of_persons_or_property;inv_Make_optimistic_comment;inv_Appeal_for_de-escalation_of_military_engagement;Express_intent_to_mediate;inv_Accuse_of_crime,_corruption;Accuse;inv_Reject_military_cooperation;inv_Threaten_to_reduce_or_break_relations;inv_Sign_formal_agreement;Make_empathetic_comment;inv_Engage_in_negotiation;Impose_restrictions_on_political_freedoms;Appeal_to_others_to_meet_or_negotiate;inv_Threaten_with_repression;inv_Yield;Criticize_or_denounce;Appeal_for_military_aid;inv_Reject_material_cooperation;inv_Make_empathetic_comment;Ease_administrative_sanctions;inv_Express_intent_to_cooperate_on_intelligence;Threaten_to_halt_negotiations;inv_Appeal_for_easing_of_administrative_sanctions;Appeal_for_aid;inv_Reject_economic_cooperation;inv_Express_accord;Engage_in_violent_protest_for_rights;inv_Arrest,_detain,_or_charge_with_legal_action;inv_Assassinate;inv_Demonstrate_or_rally;Seize_or_damage_property;inv_Express_intent_to_engage_in_material_cooperation;inv_Carry_out_suicide_bombing;inv_Reject_plan,_agreement_to_settle_dispute;Demand_mediation;Engage_in_symbolic_act;Appeal_to_others_to_settle_dispute;inv_Refuse_to_yield;Accuse_of_crime,_corruption;Praise_or_endorse;inv_Abduct,_hijack,_or_take_hostage;inv_Reject_request_for_military_aid;inv_Reduce_or_break_diplomatic_relations;Express_intent_to_ease_administrative_sanctions;inv_Expel_or_withdraw;inv_Express_intent_to_cooperate_militarily;Use_unconventional_violence;inv_Appeal_for_military_aid;Engage_in_diplomatic_cooperation;Protest_violently,_riot;Obstruct_passage,_block;Appeal_to_engage_in_or_accept_mediation;inv_Appeal_to_others_to_settle_dispute;inv_Engage_in_violent_protest_for_rights;Threaten_non-force;Reduce_relations;Physically_assault;Appeal_for_de-escalation_of_military_engagement;Reject_judicial_cooperation;inv_Express_intent_to_provide_military_aid;inv_Express_intent_to_meet_or_negotiate;inv_Share_intelligence_or_information;Appeal_for_rights;Arrest,_detain,_or_charge_with_legal_action;inv_Threaten_with_military_force;Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support);Abduct,_hijack,_or_take_hostage;Demand_release_of_persons_or_property;inv_Make_a_visit;inv_Reject;inv_Attempt_to_assassinate;Consult;Threaten_with_political_dissent,_protest;Make_an_appeal_or_request;Express_intent_to_provide_military_aid;inv_Impose_state_of_emergency_or_martial_law;inv_Threaten_non-force;Threaten_with_military_force;inv_Bring_lawsuit_against;Demand_material_cooperation;inv_Ease_economic_sanctions,_boycott,_embargo;Appeal_for_material_cooperation;Complain_officially;Demand_judicial_cooperation;inv_Praise_or_endorse;Rally_support_on_behalf_of;inv_Accede_to_demands_for_change_in_institutions,_regime;Accede_to_demands_for_rights;inv_Consult;Express_intent_to_meet_or_negotiate;Investigate;inv_Express_intent_to_provide_military_protection_or_peacekeeping;Appeal_for_diplomatic_cooperation_(such_as_policy_support);inv_Engage_in_symbolic_act;Host_a_visit;inv_Demand_that_target_yields;inv_Reject_request_for_military_protection_or_peacekeeping;Impose_administrative_sanctions;inv_Apologize;inv_Appeal_for_aid;Reject_military_cooperation;inv_Demand_release_of_persons_or_property;Obstruct_passage_to_demand_leadership_change;Ease_economic_sanctions,_boycott,_embargo;Accede_to_demands_for_change_in_institutions,_regime;Threaten_with_repression;inv_Appeal_to_yield;Express_intent_to_provide_humanitarian_aid;Demand_intelligence_cooperation;inv_Provide_military_aid;inv_Mobilize_or_increase_armed_forces;Demand_de-escalation_of_military_engagement;inv_Threaten;inv_Appeal_for_rights;Demand_that_target_yields;inv_Give_ultimatum;inv_Deny_responsibility;inv_Engage_in_material_cooperation;inv_Accede_to_demands_for_change_in_leadership;inv_Demand_intelligence_cooperation;Conduct_suicide,_car,_or_other_non-military_bombing;inv_Appeal_to_engage_in_or_accept_mediation;Provide_military_aid;inv_Appeal_for_material_cooperation;Accede_to_demands_for_change_in_leadership;Demonstrate_or_rally;inv_Carry_out_car_bombing;Reduce_or_break_diplomatic_relations;inv_Reject_judicial_cooperation;Threaten_to_halt_mediation;inv_Ease_administrative_sanctions;inv_Sexually_assault;inv_Ease_military_blockade;inv_Mediate;inv_Coerce;Express_intent_to_cooperate_on_intelligence;inv_Demand_humanitarian_aid;Receive_inspectors;inv_Use_tactics_of_violent_repression;fight_with_small_arms_and_light_weapons;inv_Threaten_to_halt_mediation;Destroy_property;Reduce_or_stop_humanitarian_assistance;Return,_release_person(s);Demand;inv_Engage_in_diplomatic_cooperation;inv_Appeal_for_change_in_institutions,_regime;inv_Violate_ceasefire;inv_Halt_negotiations;fight_with_artillery_and_tanks;inv_Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support);inv_Demand_policy_change;inv_Expel_or_withdraw_peacekeepers;Kill_by_physical_assault;Reject_request_for_change_in_leadership;Bring_lawsuit_against;Use_conventional_military_force;Reduce_or_stop_military_assistance;inv_Threaten_with_sanctions,_boycott,_embargo;inv_Physically_assault;Refuse_to_release_persons_or_property;inv_Express_intent_to_de-escalate_military_engagement;inv_Demand_mediation.
+
+ Return the rules only without any explanations.
+Sample 5 time: 
+Temporal Logical Rules:
+ Temporal Logical Rules "Accuse(X0,Xl,Tl)<-R1(X0,X1,T0)&...&Rl(X(l-1),Xl,T(l-1))" are rules used in temporal knowledge graph reasoning to predict relations between entities over time. They describe how the relation "Accuse" between entities "X0" and "Xl" evolves from past time steps "Ti (i={0,...,(l-1)})"(rule body) to the next "Tl" (rule head), strictly following the constraint "T0 <= ··· <= T(l-1) < Tl".
+
+You are an expert in temporal knowledge graph reasoning, and please generate as many temporal logical rules as possible related to "Rl" based on extracted temporal rules.
+
+Here are a few examples: 
+
+Rule head: inv_Provide_humanitarian_aid(X0,Xl,Tl)
+Sampled rules:
+	inv_Provide_humanitarian_aid(X0,X1,T1)<-inv_Engage_in_diplomatic_cooperation(X0,X1,T0)
+	inv_Provide_humanitarian_aid(X0,X3,T3)<-inv_Criticize_or_denounce(X0,X1,T0)&inv_Demand(X1,X2,T1)&Make_a_visit(X2,X3,T2)
+	inv_Provide_humanitarian_aid(X0,X2,T2)<-Make_a_visit(X0,X1,T0)&Make_a_visit(X1,X2,T1)
+Generated Temporal logic rules:
+	inv_Provide_humanitarian_aid(X0,X1,T1)<-inv_Provide_aid(X0,X1,T0)
+	inv_Provide_humanitarian_aid(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Consult(X1,X2,T1)
+	inv_Provide_humanitarian_aid(X0,X3,T3)<-inv_Return,_release_person(s)(X0,X1,T0)&Return,_release_person(s)(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Rule head: Appeal_for_change_in_institutions,_regime(X0,Xl,Tl)
+Sampled rules:
+	Appeal_for_change_in_institutions,_regime(X0,X1,T1)<-inv_Engage_in_symbolic_act(X0,X1,T0)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Criticize_or_denounce(X0,X1,T0)&Make_pessimistic_comment(X1,X2,T1)
+Generated Temporal logic rules:
+	Appeal_for_change_in_institutions,_regime(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Rally_support_on_behalf_of(X0,X1,T0)&Praise_or_endorse(X1,X2,T1)
+	Appeal_for_change_in_institutions,_regime(X0,X3,T3)<-Appeal_for_change_in_institutions,_regime(X0,X1,T0)&Host_a_visit(X1,X2,T1)&inv_Criticize_or_denounce(X2,X3,T2)
+	Appeal_for_change_in_institutions,_regime(X0,X2,T2)<-inv_Engage_in_symbolic_act(X0,X1,T0)&inv_Consult(X1,X2,T1)
+
+Rule head: Appeal_for_economic_aid(X0,Xl,Tl)
+Sampled rules:
+	Appeal_for_economic_aid(X0,X1,T1)<-inv_Reduce_or_stop_military_assistance(X0,X1,T0)
+	Appeal_for_economic_aid(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Make_statement(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X3,T3)<-inv_Demand(X0,X1,T0)&inv_Accede_to_demands_for_change_in_leadership(X1,X2,T1)&Accuse(X2,X3,T2)
+Generated Temporal logic rules:
+	Appeal_for_economic_aid(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&Appeal_for_military_aid(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X2,T2)<-inv_Express_intent_to_cooperate(X0,X1,T0)&Make_statement(X1,X2,T1)
+	Appeal_for_economic_aid(X0,X1,T1)<-Make_an_appeal_or_request(X0,X1,T0)
+
+Sampled rules:
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Reduce_or_break_diplomatic_relations(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)&inv_Praise_or_endorse(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-inv_Reject(X0,X1,T0)
+
+Accuse(X0,X3,T3)<-Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&Expel_or_deport_individuals(X1,X2,T1)&inv_Expel_or_deport_individuals(X2,X3,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Abduct,_hijack,_or_take_hostage(X1,X2,T1)&Abduct,_hijack,_or_take_hostage(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&Make_statement(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Use_conventional_military_force(X1,X2,T1)&Use_conventional_military_force(X2,X1,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&Criticize_or_denounce(X1,X2,T1)&inv_Make_an_appeal_or_request(X2,X1,T2)
+
+Accuse(X0,X1,T3)<-inv_Reduce_relations(X0,X1,T0)&inv_Threaten(X1,X0,T1)&inv_Express_intent_to_meet_or_negotiate(X0,X1,T2)
+
+Accuse(X0,X1,T1)<-inv_Threaten(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Express_intent_to_meet_or_negotiate(X1,X2,T1)
+
+Accuse(X0,X3,T3)<-Express_intent_to_meet_or_negotiate(X0,X1,T0)&inv_Consult(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Accuse(X0,X1,T3)<-Reject(X0,X1,T0)&Demonstrate_or_rally(X1,X2,T1)&inv_Express_intent_to_meet_or_negotiate(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-inv_Accuse(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-inv_Arrest,_detain,_or_charge_with_legal_action(X0,X1,T0)&inv_Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-inv_Make_statement(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Make_a_visit(X1,X2,T1)&inv_Host_a_visit(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-Criticize_or_denounce(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-inv_Criticize_or_denounce(X0,X1,T0)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&inv_Express_intent_to_meet_or_negotiate(X1,X2,T1)&Make_statement(X2,X1,T2)
+
+Accuse(X0,X1,T1)<-inv_Praise_or_endorse(X0,X1,T0)
+
+Accuse(X0,X2,T3)<-inv_Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&inv_Express_intent_to_cooperate(X1,X0,T1)&Make_statement(X0,X2,T2)
+
+Accuse(X0,X3,T3)<-inv_Engage_in_diplomatic_cooperation(X0,X1,T0)&inv_Engage_in_diplomatic_cooperation(X1,X2,T1)&inv_Express_intent_to_cooperate(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-Make_statement(X0,X1,T0)
+
+Accuse(X0,X3,T3)<-Make_statement(X0,X1,T0)&inv_Make_statement(X1,X2,T1)&Accuse(X2,X3,T2)
+
+Accuse(X0,X1,T3)<-Accuse(X0,X1,T0)&Protest_violently,_riot(X1,X2,T1)&inv_Accuse_of_crime,_corruption(X2,X1,T2)
+
+Accuse(X0,X1,T3)<-inv_Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)&inv_Make_statement(X1,X2,T1)&Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support)(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-inv_Use_conventional_military_force(X0,X1,T0)&inv_Praise_or_endorse(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-Consult(X0,X1,T0)
+
+Accuse(X0,X2,T2)<-inv_Make_an_appeal_or_request(X0,X1,T0)&Make_statement(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Complain_officially(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Make_an_appeal_or_request(X0,X1,T0)&inv_Sexually_assault(X1,X2,T1)
+
+Accuse(X0,X3,T3)<-Make_an_appeal_or_request(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)&inv_Criticize_or_denounce(X2,X3,T2)
+
+Accuse(X0,X1,T1)<-inv_Make_an_appeal_or_request(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-Use_unconventional_violence(X0,X1,T0)
+
+Accuse(X0,X3,T3)<-inv_Accuse(X0,X1,T0)&Make_pessimistic_comment(X1,X2,T1)&inv_Accuse(X2,X3,T2)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&inv_Express_intent_to_cooperate(X1,X2,T1)
+
+Accuse(X0,X1,T1)<-inv_Arrest,_detain,_or_charge_with_legal_action(X0,X1,T0)
+
+Accuse(X0,X1,T1)<-inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X0,X1,T0)
+
+Accuse(X0,X3,T3)<-inv_Demand(X0,X1,T0)&Make_statement(X1,X2,T1)&inv_Accuse(X2,X3,T2)
+
+Accuse(X0,X2,T2)<-inv_Make_statement(X0,X1,T0)&Make_an_appeal_or_request(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Provide_humanitarian_aid(X1,X2,T1)
+
+Accuse(X0,X2,T2)<-Make_statement(X0,X1,T0)&Investigate(X1,X2,T1)
+
+Accuse(X0,X1,T3)<-Conduct_suicide,_car,_or_other_non-military_bombing(X0,X1,T0)&Appeal_for_military_aid(X1,X2,T1)&Express_intent_to_release_persons_or_property(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-inv_Appeal_for_de-escalation_of_military_engagement(X0,X1,T0)&Appeal_for_diplomatic_cooperation_(such_as_policy_support)(X1,X2,T1)
+
+Accuse(X0,X3,T3)<-inv_Make_pessimistic_comment(X0,X1,T0)&Make_statement(X1,X2,T1)&inv_Make_an_appeal_or_request(X2,X3,T2)
+
+Accuse(X0,X1,T3)<-Defy_norms,_law(X0,X1,T0)&Consult(X1,X2,T1)&Consult(X2,X1,T2)
+
+Accuse(X0,X2,T2)<-Demand(X0,X1,T0)&Demand(X1,X2,T1)
+
+
+
+
+Let's think step-by-step, please generate as many as possible most relevant temporal rules that are relative to "Accuse(X0,Xl,Tl)" based on the above sampled rules.
+
+
+
+
+
+
+
+
+
+
+
+For the relations in rule body, you are going to choose from the following candidates: inv_Express_intent_to_mediate;Express_intent_to_release_persons_or_property;Reject_proposal_to_meet,_discuss,_or_negotiate;Express_intent_to_accept_mediation;Expel_or_withdraw;inv_Express_intent_to_release_persons_or_property;inv_Appeal_for_change_in_leadership;Express_intent_to_provide_material_aid;inv_Grant_diplomatic_recognition;Provide_aid;Demand_rights;Employ_aerial_weapons;inv_Expel_or_deport_individuals;inv_Obstruct_passage,_block;inv_Impose_administrative_sanctions;inv_Appeal_for_military_protection_or_peacekeeping;Refuse_to_yield;inv_Acknowledge_or_claim_responsibility;Carry_out_suicide_bombing;Make_pessimistic_comment;inv_Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo;inv_Accede_to_demands_for_rights;Provide_military_protection_or_peacekeeping;Demand_easing_of_administrative_sanctions;Mediate;inv_Return,_release_person(s);Demand_military_aid;inv_Conduct_suicide,_car,_or_other_non-military_bombing;inv_Investigate;inv_Express_intent_to_provide_material_aid;inv_Appeal_for_release_of_persons_or_property;Use_tactics_of_violent_repression;inv_Express_intent_to_accept_mediation;Grant_diplomatic_recognition;Deny_responsibility;inv_Engage_in_mass_killings;inv_Provide_humanitarian_aid;inv_Reject_request_for_change_in_leadership;Appeal_for_easing_of_administrative_sanctions;Impose_blockade,_restrict_movement;Reject_material_cooperation;inv_Use_unconventional_violence;inv_Express_intent_to_provide_humanitarian_aid;Reject_request_for_military_aid;inv_Conduct_strike_or_boycott;Engage_in_material_cooperation;Express_intent_to_provide_military_protection_or_peacekeeping;inv_Demonstrate_military_or_police_power;inv_Confiscate_property;Appeal_for_humanitarian_aid;Appeal_to_yield;inv_Refuse_to_ease_administrative_sanctions;Conduct_strike_or_boycott;inv_Make_statement;Make_a_visit;inv_Carry_out_roadside_bombing;Acknowledge_or_claim_responsibility;Make_statement;inv_Accuse_of_war_crimes;inv_Decline_comment;Engage_in_negotiation;inv_Demand_easing_of_administrative_sanctions;Consider_policy_option;inv_Forgive;Express_intent_to_ease_economic_sanctions,_boycott,_or_embargo;Demand_diplomatic_cooperation_(such_as_policy_support);inv_Veto;inv_Impose_embargo,_boycott,_or_sanctions;Impose_embargo,_boycott,_or_sanctions;inv_Criticize_or_denounce;Demonstrate_military_or_police_power;inv_Reject_proposal_to_meet,_discuss,_or_negotiate;inv_Halt_mediation;Impose_state_of_emergency_or_martial_law;inv_Impose_blockade,_restrict_movement;Demand_humanitarian_aid;Give_ultimatum;Apologize;Express_intent_to_cooperate_militarily;inv_Threaten_with_political_dissent,_protest;inv_Complain_officially;Express_intent_to_de-escalate_military_engagement;Demand_policy_change;inv_Demand_material_cooperation;inv_Obstruct_passage_to_demand_leadership_change;inv_Express_intent_to_yield;inv_Refuse_to_release_persons_or_property;Appeal_for_military_protection_or_peacekeeping;Violate_ceasefire;inv_Demand_settling_of_dispute;inv_Use_conventional_military_force;inv_Accuse_of_espionage,_treason;inv_Destroy_property;inv_Make_pessimistic_comment;Threaten_with_sanctions,_boycott,_embargo;Threaten_to_reduce_or_stop_aid;inv_Demand_diplomatic_cooperation_(such_as_policy_support);Expel_or_withdraw_peacekeepers;inv_Appeal_for_judicial_cooperation;Decline_comment;Express_intent_to_yield;inv_Accuse;Cooperate_militarily;inv_Receive_inspectors;inv_Demand_judicial_cooperation;inv_Impose_restrictions_on_political_freedoms;Carry_out_car_bombing;inv_Return,_release_property;Accuse_of_war_crimes;inv_Threaten_to_reduce_or_stop_aid;inv_Cooperate_militarily;Express_intent_to_engage_in_material_cooperation;inv_Appeal_for_humanitarian_aid;Demand_material_aid;Express_intent_to_cooperate;inv_Demand_military_aid;Reduce_or_stop_economic_assistance;Engage_in_mass_killings;Appeal_for_easing_of_economic_sanctions,_boycott,_or_embargo;inv_Make_an_appeal_or_request;Expel_or_deport_individuals;Express_accord;inv_Demand_de-escalation_of_military_engagement;Threaten_to_reduce_or_break_relations;Return,_release_property;inv_Engage_in_mass_expulsion;inv_Provide_military_protection_or_peacekeeping;inv_Demand_material_aid;Reject_request_for_military_protection_or_peacekeeping;inv_fight_with_artillery_and_tanks;inv_Demand;Refuse_to_ease_administrative_sanctions;inv_Consider_policy_option;inv_Employ_aerial_weapons;Ease_military_blockade;inv_Demand_meeting,_negotiation;Reject;inv_Appeal_for_diplomatic_cooperation_(such_as_policy_support);inv_Demand_rights;inv_Express_intent_to_ease_administrative_sanctions;Accuse_of_aggression;inv_Host_a_visit;inv_Accuse_of_aggression;Threaten;Reject_plan,_agreement_to_settle_dispute;Coerce;inv_Threaten_with_administrative_sanctions;Threaten_with_administrative_sanctions;Provide_humanitarian_aid;Yield;inv_Provide_aid;inv_Threaten_to_halt_negotiations;Confiscate_property;Attempt_to_assassinate;inv_Express_intent_to_cooperate;inv_Seize_or_damage_property;inv_fight_with_small_arms_and_light_weapons;inv_Appeal_to_others_to_meet_or_negotiate;Torture;inv_Protest_violently,_riot;Demand_meeting,_negotiation;Carry_out_roadside_bombing;inv_Kill_by_physical_assault;Sexually_assault;inv_Appeal_for_easing_of_economic_sanctions,_boycott,_or_embargo;inv_Reduce_or_stop_economic_assistance;inv_Rally_support_on_behalf_of;Halt_negotiations;inv_Torture;Appeal_for_release_of_persons_or_property;inv_Make_optimistic_comment;inv_Appeal_for_de-escalation_of_military_engagement;Express_intent_to_mediate;inv_Accuse_of_crime,_corruption;Accuse;inv_Reject_military_cooperation;inv_Threaten_to_reduce_or_break_relations;inv_Sign_formal_agreement;Make_empathetic_comment;inv_Engage_in_negotiation;Impose_restrictions_on_political_freedoms;Appeal_to_others_to_meet_or_negotiate;inv_Threaten_with_repression;inv_Yield;Criticize_or_denounce;Appeal_for_military_aid;inv_Reject_material_cooperation;inv_Make_empathetic_comment;Ease_administrative_sanctions;inv_Express_intent_to_cooperate_on_intelligence;Threaten_to_halt_negotiations;inv_Appeal_for_easing_of_administrative_sanctions;Appeal_for_aid;inv_Reject_economic_cooperation;inv_Express_accord;Engage_in_violent_protest_for_rights;inv_Arrest,_detain,_or_charge_with_legal_action;inv_Assassinate;inv_Demonstrate_or_rally;Seize_or_damage_property;inv_Express_intent_to_engage_in_material_cooperation;inv_Carry_out_suicide_bombing;inv_Reject_plan,_agreement_to_settle_dispute;Demand_mediation;Engage_in_symbolic_act;Appeal_to_others_to_settle_dispute;inv_Refuse_to_yield;Accuse_of_crime,_corruption;Praise_or_endorse;inv_Abduct,_hijack,_or_take_hostage;inv_Reject_request_for_military_aid;inv_Reduce_or_break_diplomatic_relations;Express_intent_to_ease_administrative_sanctions;inv_Expel_or_withdraw;inv_Express_intent_to_cooperate_militarily;Use_unconventional_violence;inv_Appeal_for_military_aid;Engage_in_diplomatic_cooperation;Protest_violently,_riot;Obstruct_passage,_block;Appeal_to_engage_in_or_accept_mediation;inv_Appeal_to_others_to_settle_dispute;inv_Engage_in_violent_protest_for_rights;Threaten_non-force;Reduce_relations;Physically_assault;Appeal_for_de-escalation_of_military_engagement;Reject_judicial_cooperation;inv_Express_intent_to_provide_military_aid;inv_Express_intent_to_meet_or_negotiate;inv_Share_intelligence_or_information;Appeal_for_rights;Arrest,_detain,_or_charge_with_legal_action;inv_Threaten_with_military_force;Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support);Abduct,_hijack,_or_take_hostage;Demand_release_of_persons_or_property;inv_Make_a_visit;inv_Reject;inv_Attempt_to_assassinate;Consult;Threaten_with_political_dissent,_protest;Make_an_appeal_or_request;Express_intent_to_provide_military_aid;inv_Impose_state_of_emergency_or_martial_law;inv_Threaten_non-force;Threaten_with_military_force;inv_Bring_lawsuit_against;Demand_material_cooperation;inv_Ease_economic_sanctions,_boycott,_embargo;Appeal_for_material_cooperation;Complain_officially;Demand_judicial_cooperation;inv_Praise_or_endorse;Rally_support_on_behalf_of;inv_Accede_to_demands_for_change_in_institutions,_regime;Accede_to_demands_for_rights;inv_Consult;Express_intent_to_meet_or_negotiate;Investigate;inv_Express_intent_to_provide_military_protection_or_peacekeeping;Appeal_for_diplomatic_cooperation_(such_as_policy_support);inv_Engage_in_symbolic_act;Host_a_visit;inv_Demand_that_target_yields;inv_Reject_request_for_military_protection_or_peacekeeping;Impose_administrative_sanctions;inv_Apologize;inv_Appeal_for_aid;Reject_military_cooperation;inv_Demand_release_of_persons_or_property;Obstruct_passage_to_demand_leadership_change;Ease_economic_sanctions,_boycott,_embargo;Accede_to_demands_for_change_in_institutions,_regime;Threaten_with_repression;inv_Appeal_to_yield;Express_intent_to_provide_humanitarian_aid;Demand_intelligence_cooperation;inv_Provide_military_aid;inv_Mobilize_or_increase_armed_forces;Demand_de-escalation_of_military_engagement;inv_Threaten;inv_Appeal_for_rights;Demand_that_target_yields;inv_Give_ultimatum;inv_Deny_responsibility;inv_Engage_in_material_cooperation;inv_Accede_to_demands_for_change_in_leadership;inv_Demand_intelligence_cooperation;Conduct_suicide,_car,_or_other_non-military_bombing;inv_Appeal_to_engage_in_or_accept_mediation;Provide_military_aid;inv_Appeal_for_material_cooperation;Accede_to_demands_for_change_in_leadership;Demonstrate_or_rally;inv_Carry_out_car_bombing;Reduce_or_break_diplomatic_relations;inv_Reject_judicial_cooperation;Threaten_to_halt_mediation;inv_Ease_administrative_sanctions;inv_Sexually_assault;inv_Ease_military_blockade;inv_Mediate;inv_Coerce;Express_intent_to_cooperate_on_intelligence;inv_Demand_humanitarian_aid;Receive_inspectors;inv_Use_tactics_of_violent_repression;fight_with_small_arms_and_light_weapons;inv_Threaten_to_halt_mediation;Destroy_property;Reduce_or_stop_humanitarian_assistance;Return,_release_person(s);Demand;inv_Engage_in_diplomatic_cooperation;inv_Appeal_for_change_in_institutions,_regime;inv_Violate_ceasefire;inv_Halt_negotiations;fight_with_artillery_and_tanks;inv_Express_intent_to_engage_in_diplomatic_cooperation_(such_as_policy_support);inv_Demand_policy_change;inv_Expel_or_withdraw_peacekeepers;Kill_by_physical_assault;Reject_request_for_change_in_leadership;Bring_lawsuit_against;Use_conventional_military_force;Reduce_or_stop_military_assistance;inv_Threaten_with_sanctions,_boycott,_embargo;inv_Physically_assault;Refuse_to_release_persons_or_property;inv_Express_intent_to_de-escalate_military_engagement;inv_Demand_mediation.
+
+ Return the rules only without any explanations.
